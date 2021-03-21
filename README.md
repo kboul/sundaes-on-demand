@@ -14,6 +14,15 @@ Run `npm install` to run the server
 or run `npm server` to run server using nodemon
 or run `npm run dev` to run both client and server. The server will be found at [localhost:3030](http://localhost:3030) while the client at [localhost:3000](http://localhost:3000).
 
+## Kill server
+
+In case you reeive the following error:
+Node / Express: EADDRINUSE, Address already in use - Kill server
+
+```
+sudo pkill node
+```
+
 ## Using the server
 
 Server routes:

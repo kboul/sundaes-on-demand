@@ -1,0 +1,40 @@
+{
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest": true
+    },
+    "extends": [
+        "react-app",
+        "react-app/jest",
+        "plugin:react/recommended",
+        "plugin:testing-library/recommended",
+        "plugin:testing-library/react",
+        "plugin:jest-dom/recommended",
+        "airbnb",
+        "prettier"
+    ],
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018,
+        "sourceType": "module"
+    },
+    "plugins": ["react", "prettier", "testing-library", "jest-dom"],
+    "rules": {
+        "react/jsx-uses-react": "off",
+        "react/react-in-jsx-scope": "off",
+        "indent": "off",
+        "react/jsx-indent": ["error", 4],
+        "comma-dangle": ["error", "never"], // trailingComma
+        "import/no-named-as-default": "off",
+        "import/no-named-as-default-member": "off",
+        "arrow-parens": "off",
+        "object-curly-newline": "off"
+    }
+}
