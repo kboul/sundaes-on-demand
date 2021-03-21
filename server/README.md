@@ -6,11 +6,12 @@ A full stack application using react & node from the "Sundaes on Demand" app in 
 
 1. Clone or fork the course repository
 2. `cd` into the `sundaes-on-demand` directory (where this README is located).
-3. `npm i && npm run server-install` to install both client & server dependencies.
+3. `npm i && npm run client-install` to install both client & server dependencies.
 
 ## Starting the app
 
-Run `npm install` to run the client
+Run `npm install` to run the server
+or run `npm server` to run server using nodemon
 or run `npm run dev` to run both client and server. The server will be found at [localhost:3030](http://localhost:3030) while the client at [localhost:3000](http://localhost:3000).
 
 ## Kill server
@@ -26,9 +27,9 @@ sudo pkill node
 
 Server routes:
 
--   `GET /scoops` and `GET /toppings` return sundae options (array of objects with keys `name` and `imagePath`)
--   `POST /order` returns a random order number (does not process order)
--   images via static `/images` directory.
+- `GET /scoops` and `GET /toppings` return sundae options (array of objects with keys `name` and `imagePath`)
+- `POST /order` returns a random order number (does not process order)
+- images via static `/images` directory.
 
 ## Testing
 
