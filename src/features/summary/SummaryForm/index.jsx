@@ -1,11 +1,23 @@
 import { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, OverlayTrigger, Popover } from 'react-bootstrap';
 
-const termsColor = { color: 'blue' };
+const termsColor = { color: 'blue', paddingLeft: 5 };
+const popover = (
+    <Popover>
+        <Popover.Content>
+            No ice cream will actually be delivered
+        </Popover.Content>
+    </Popover>
+);
 const label = (
-    <div>
-        I agree to <span style={termsColor}>Terms and Conditions</span>
-    </div>
+    <>
+        I agree to
+        <OverlayTrigger placement="right" overlay={popover}>
+            <span style={termsColor} data-testid="terms">
+                Terms and Conditions
+            </span>
+        </OverlayTrigger>
+    </>
 );
 
 export default function SummaryForm() {
@@ -13,13 +25,16 @@ export default function SummaryForm() {
 
     return (
         <Form>
-            <Form.Check
-                inline
-                onChange={e => setCheckbox(e.target.checked)}
-                label={label}
-                type="checkbox"
-                value={checkbox}
-            />
+            <Form.Group controlId="checkbox">
+                <Form.Check
+                    inline
+                    onChange={e => setCheckbox(e.target.checked)}
+                    label={label}
+                    type="checkbox"
+                    value={checkbox}
+                />
+            </Form.Group>
+
             <Button disabled={!checkbox} variant="primary">
                 Confirm Order
             </Button>

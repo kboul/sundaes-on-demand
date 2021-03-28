@@ -1,3 +1,5 @@
+import SummaryForm from '../features/summary/SummaryForm';
+
 export default function App() {
-    return <div>hello world</div>;
+    return <SummaryForm />;
 }
