@@ -12,7 +12,7 @@ const popover = (
 const label = (
     <>
         I agree to
-        <OverlayTrigger placement="right" overlay={popover}>
+        <OverlayTrigger placement="right" overlay={popover} transition={false}>
             <span style={termsColor} data-testid="terms">
                 Terms and Conditions
             </span>
