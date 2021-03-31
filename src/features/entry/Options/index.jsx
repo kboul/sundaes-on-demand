@@ -1,15 +1,16 @@
 import PropTypes from 'prop-types';
-import axios from 'axios';
 import { useCallback, useEffect, useState } from 'react';
 import { Row } from 'react-bootstrap';
 
 import ScoopOption from '../ScoopOption';
+import ToppingOption from '../ToppingOption';
+import client from '../../../api/client';
 
 export default function Options({ optionType }) {
     const [items, setItems] = useState([]);
 
     const getOptions = useCallback(async () => {
-        const response = await axios.get(`http://localhost:3030/${optionType}`);
+        const response = await client.get(optionType);
         try {
             setItems(response.data);
         } catch (error) {
@@ -21,7 +22,7 @@ export default function Options({ optionType }) {
         getOptions();
     }, [getOptions]);
 
-    const ItemComponent = optionType === 'scoops' ? ScoopOption : null;
+    const ItemComponent = optionType === 'scoops' ? ScoopOption : ToppingOption;
 
     const optionItems = items.map(item => (
         <ItemComponent item={item} key={item.name} />
