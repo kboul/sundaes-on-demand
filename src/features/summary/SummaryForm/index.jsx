@@ -28,8 +28,8 @@ export default function SummaryForm() {
             <Form.Group controlId="checkbox">
                 <Form.Check
                     inline
-                    onChange={e => setCheckbox(e.target.checked)}
                     label={label}
+                    onChange={e => setCheckbox(e.target.checked)}
                     type="checkbox"
                     value={checkbox}
                 />
