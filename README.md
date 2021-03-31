@@ -10,8 +10,7 @@ A full stack application using react & node from the "Sundaes on Demand" app in 
 
 ## Starting the app
 
-Run `npm install` to run the client
-or run `npm run dev` to run both client and server. The server will be found at [localhost:3030](http://localhost:3030) while the client at [localhost:3000](http://localhost:3000).
+Run `npm run dev` to run both client and server. The server will be found at [localhost:3030](http://localhost:3030) while the client at [localhost:3000](http://localhost:3000).
 
 ## Kill server
 

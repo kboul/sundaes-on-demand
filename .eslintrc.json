@@ -37,6 +37,18 @@
         "arrow-parens": "off",
         "object-curly-newline": "off",
         "import/prefer-default-export": "off",
-        "arrow-body-style": "off"
+        "arrow-body-style": "off",
+        // allow imports of devDependencies in test files only
+        "import/no-extraneous-dependencies": [
+            "error",
+            {
+                "devDependencies": [
+                    "**/*.test.js",
+                    "**/*.test.jsx",
+                    "./src/mocks/*",
+                    "./src/setupTests.js"
+                ]
+            }
+        ]
     }
 }
