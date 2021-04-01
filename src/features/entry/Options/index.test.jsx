@@ -2,9 +2,10 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import Options from '.';
+import { OrderDetailsProvider } from '../../../contexts/OrderDetails';
 
 test('displays image for each scoop option from server', async () => {
-    render(<Options optionType="scoops" />);
+    render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider });
 
     // find images
     const scoopImages = await screen.findAllByRole('img', { name: /scoop$/i });
@@ -16,7 +17,9 @@ test('displays image for each scoop option from server', async () => {
 });
 
 test('displays image for each topping option from server', async () => {
-    render(<Options optionType="toppings" />);
+    render(<Options optionType="toppings" />, {
+        wrapper: OrderDetailsProvider
+    });
 
     const toppingsImage = await screen.findAllByRole('img', {
         name: /topping$/i
@@ -33,10 +36,12 @@ test('displays image for each topping option from server', async () => {
 });
 
 test('update scoop subtotal when scoops change', async () => {
-    render(<Options optionType="scoops" />);
+    render(<Options optionType="scoops" />, { wrapper: OrderDetailsProvider });
 
     // make sure total starts at $0.00
-    const scoopsSubtotal = screen.getByTestId('scoopsTotal');
+    const scoopsSubtotal = screen.getByText('Scoops total: $', {
+        exact: false
+    });
     expect(scoopsSubtotal).toHaveTextContent('0.00');
 
     // update vanilla scoops to 1 and check subtotal
@@ -53,5 +58,5 @@ test('update scoop subtotal when scoops change', async () => {
     });
     userEvent.clear(chocolateInput);
     userEvent.type(chocolateInput, '2');
-    expect(chocolateInput).toHaveTextContent('6.00');
+    expect(scoopsSubtotal).toHaveTextContent('6.00');
 });

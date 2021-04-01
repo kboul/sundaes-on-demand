@@ -17,11 +17,20 @@ export function useOrderDetails() {
 
 function calculateSubtotal(optionType, optionCounts) {
     let optionCount = 0;
-    Object.values(optionCounts[optionType]).forEach(count => {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const count of optionCounts[optionType].values()) {
         optionCount += count;
-    });
+    }
 
     return optionCount * pricePerItem[optionType];
+}
+
+function formatCurrency(amount) {
+    return new Intl.NumberFormat('en-US', {
+        style: 'currency',
+        currency: 'USD',
+        minimumFractionDigits: 2
+    }).format(amount);
 }
 
 export function OrderDetailsProvider(props) {
@@ -30,10 +39,12 @@ export function OrderDetailsProvider(props) {
         toppings: new Map()
     });
 
+    const zeroCurrency = formatCurrency(0);
+
     const [totals, setTotals] = useState({
-        scoops: 0,
-        toppings: 0,
-        grandTotal: 0
+        scoops: zeroCurrency,
+        toppings: zeroCurrency,
+        grandTotal: zeroCurrency
     });
 
     useEffect(() => {
@@ -41,17 +52,17 @@ export function OrderDetailsProvider(props) {
         const toppingsSubtotal = calculateSubtotal('toppings', optionCounts);
         const grandTotal = scoopsSubtotal + toppingsSubtotal;
         setTotals({
-            scoops: scoopsSubtotal,
-            toppings: toppingsSubtotal,
-            grandTotal
+            scoops: formatCurrency(scoopsSubtotal),
+            toppings: formatCurrency(toppingsSubtotal),
+            grandTotal: formatCurrency(grandTotal)
         });
     }, [optionCounts]);
 
     const value = useMemo(() => {
-        function updateItemCount(itemName, newItemCount, optiontype) {
+        function updateItemCount(itemName, newItemCount, optionType) {
             const newOptionCounts = { ...optionCounts };
 
-            const optionCountsMap = optionCounts[optiontype];
+            const optionCountsMap = optionCounts[optionType];
             optionCountsMap.set(itemName, parseInt(newItemCount));
 
             setOptionCounts(newOptionCounts);
