@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { Col, Form, Row } from 'react-bootstrap';
 
-import client from '../../../api/client';
-import styles from '../styles';
+import client from '../../api/client';
+import styles from './styles';
 
 const formGroupStyle = { marginTop: 10 };
 const labelStyle = { textAlign: 'right' };
@@ -14,7 +14,7 @@ export default function ScoopOptions({ item, updateItemCount }) {
     };
 
     return (
-        <Col xs={12} sm={6} md={3} lg={3} style={styles.colStyle}>
+        <Col xs={12} sm={6} md={3} lg={2} style={styles.colStyle}>
             <img
                 alt={`${item.name} scoop`}
                 src={`${client.defaults.baseURL}/${item.imagePath}`}

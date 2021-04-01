@@ -5,7 +5,7 @@ import {
 } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import SummaryForm from './index';
+import SummaryForm from '.';
 
 let checkbox;
 let button;
