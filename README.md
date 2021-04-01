@@ -1,6 +1,6 @@
 # Sundaes on Demand
 
-A full stack application using react & node from the "Sundaes on Demand" app in the Udemy course "Testing Library for React" to dive into jest & react-testing-libray concepts.
+A full stack application using react & node from the "Sundaes on Demand" app in the Udemy course "Testing Library for React" to dive into jest & react-testing-library concepts.
 
 ## Installing
 
