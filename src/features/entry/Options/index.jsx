@@ -7,6 +7,7 @@ import ScoopOption from '../ScoopOption';
 import ToppingOption from '../ToppingOption';
 import client from '../../../api/client';
 import { useOrderDetails } from '../../../contexts/OrderDetails';
+import { formatCurrency } from '../../../utils';
 import { pricePerItem } from '../../../constants';
 
 export default function Options({ optionType }) {
@@ -46,7 +47,7 @@ export default function Options({ optionType }) {
     return (
         <>
             <h2>{title}</h2>
-            <p>{pricePerItem[optionType]} each</p>
+            <p>{formatCurrency(pricePerItem[optionType])} each</p>
             <p>
                 {title} total: {orderDetails.totals[optionType]}
             </p>
