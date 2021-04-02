@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Button, Form, OverlayTrigger, Popover } from 'react-bootstrap';
+import PropTypes from 'prop-types';
 
 const termsColor = { color: 'blue', paddingLeft: 5 };
 const popover = (
@@ -20,11 +21,17 @@ const label = (
     </>
 );
 
-export default function SummaryForm() {
+export default function SummaryForm({ setOrderPhase }) {
     const [checkbox, setCheckbox] = useState(false);
 
+    const handleSubmit = e => {
+        e.preventDefault();
+
+        setOrderPhase('completed');
+    };
+
     return (
-        <Form>
+        <Form onSubmit={handleSubmit}>
             <Form.Group controlId="checkbox">
                 <Form.Check
                     inline
@@ -35,9 +42,13 @@ export default function SummaryForm() {
                 />
             </Form.Group>
 
-            <Button disabled={!checkbox} variant="primary">
+            <Button disabled={!checkbox} type="submit" variant="primary">
                 Confirm Order
             </Button>
         </Form>
     );
 }
+
+SummaryForm.propTypes = {
+    setOrderPhase: PropTypes.func
+};

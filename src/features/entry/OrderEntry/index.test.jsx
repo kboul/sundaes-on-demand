@@ -47,6 +47,7 @@ describe('grand total', () => {
             name: 'Cherries'
         });
         userEvent.click(cherriesInput);
+
         const grandTotal = screen.getByText('Grand total', { exact: false });
         expect(grandTotal).toHaveTextContent('1.50');
     });

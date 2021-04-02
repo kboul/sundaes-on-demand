@@ -19,5 +19,8 @@ export const handlers = [
                 { name: 'Hot fudge', imagePath: '/images/hot-fudge' }
             ])
         );
+    }),
+    rest.post(`${client.defaults.baseURL}/order`, (req, res, ctx) => {
+        return res(ctx.json(1233332536));
     })
 ];

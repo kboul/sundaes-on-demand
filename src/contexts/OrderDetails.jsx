@@ -45,6 +45,7 @@ export function OrderDetailsProvider(props) {
         const scoopsSubtotal = calculateSubtotal('scoops', optionCounts);
         const toppingsSubtotal = calculateSubtotal('toppings', optionCounts);
         const grandTotal = scoopsSubtotal + toppingsSubtotal;
+
         setTotals({
             scoops: formatCurrency(scoopsSubtotal),
             toppings: formatCurrency(toppingsSubtotal),
@@ -61,7 +62,15 @@ export function OrderDetailsProvider(props) {
 
             setOptionCounts(newOptionCounts);
         }
-        return [{ ...optionCounts, totals }, updateItemCount];
+
+        function resetOrder() {
+            setOptionCounts({
+                scoops: new Map(),
+                toppings: new Map()
+            });
+        }
+
+        return [{ ...optionCounts, totals }, updateItemCount, resetOrder];
     }, [optionCounts, totals]);
 
     return <OrderDetails.Provider value={value} {...props} />;
