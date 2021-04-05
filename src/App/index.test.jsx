@@ -62,6 +62,9 @@ test('Order phases', async () => {
     });
     expect(thankYouHeading).toBeInTheDocument();
 
+    const notLoading = screen.queryByText('Loading...');
+    expect(notLoading).not.toBeInTheDocument();
+
     const createNewOrderButton = await screen.findByRole('button', {
         name: 'Create new order'
     });
