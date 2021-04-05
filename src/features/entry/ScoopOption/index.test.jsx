@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import ScoopOption from '.';
+import { scoopAlertText } from './constants';
 
 test('alet should be displayed when scoop has negative input', () => {
     render(
@@ -16,7 +17,7 @@ test('alet should be displayed when scoop has negative input', () => {
     userEvent.type(vanillaInput, '-1');
 
     expect(vanillaInput).toHaveClass('is-invalid');
-    const alertMessage = screen.getByText('Please provide', { exact: false });
+    const alertMessage = screen.getByText(scoopAlertText);
     expect(alertMessage).toBeInTheDocument();
 
     userEvent.clear(vanillaInput);

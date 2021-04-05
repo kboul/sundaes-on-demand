@@ -5,6 +5,7 @@ import { render, screen, waitFor } from '../../../testUtils';
 import OrderEntry from '.';
 import { server } from '../../../mocks/servers';
 import client from '../../../api/client';
+import { grandTotalText, orderBtnLabel } from './constants';
 
 test('handles error for scoops and toppings routes', async () => {
     // ovewrite existing handlers
@@ -25,7 +26,7 @@ test('handles error for scoops and toppings routes', async () => {
     });
 });
 
-describe('grand total', () => {
+describe('Grand total', () => {
     let grandTotal;
     let vanillaInput;
     let cherriesInput;
@@ -33,7 +34,7 @@ describe('grand total', () => {
     beforeEach(async () => {
         render(<OrderEntry />);
 
-        grandTotal = screen.getByText('Grand total', { exact: false });
+        grandTotal = screen.getByText(grandTotalText, { exact: false });
 
         vanillaInput = await screen.findByRole('spinbutton', {
             name: 'Vanilla'
@@ -85,7 +86,7 @@ test('enable order button if scoops or toppings have been selected', async () =>
     render(<OrderEntry setOrderPhase={jest.fn()} />);
 
     const orderButton = await screen.findByRole('button', {
-        name: 'Order sundae!'
+        name: orderBtnLabel
     });
     expect(orderButton).toBeDisabled();
 

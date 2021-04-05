@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Button, Form, OverlayTrigger, Popover } from 'react-bootstrap';
 import PropTypes from 'prop-types';
 
+import { confirmOrderBtnLabel, termsText } from './constants';
+
 const termsColor = { color: 'blue', paddingLeft: 5 };
 const popover = (
     <Popover>
@@ -14,9 +16,7 @@ const label = (
     <>
         I agree to
         <OverlayTrigger placement="right" overlay={popover}>
-            <span style={termsColor} data-testid="terms">
-                Terms and Conditions
-            </span>
+            <span style={termsColor}>{termsText}</span>
         </OverlayTrigger>
     </>
 );
@@ -43,7 +43,7 @@ export default function SummaryForm({ setOrderPhase }) {
             </Form.Group>
 
             <Button disabled={!checkbox} type="submit" variant="primary">
-                Confirm Order
+                {confirmOrderBtnLabel}
             </Button>
         </Form>
     );

@@ -6,6 +6,7 @@ import {
 import userEvent from '@testing-library/user-event';
 
 import SummaryForm from '.';
+import { termsText } from './constants';
 
 let checkbox;
 let button;
@@ -41,7 +42,7 @@ test('popover responds to hover', async () => {
     expect(noPopover).not.toBeInTheDocument();
 
     // popover appears upon mouseover of checkbox label
-    const terms = screen.getByTestId('terms');
+    const terms = screen.getByText(termsText);
     userEvent.hover(terms);
     const popover = screen.getByText(
         /no ice cream will actually be delivered/i

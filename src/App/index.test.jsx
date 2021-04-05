@@ -2,6 +2,12 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import App from '.';
+import { loadingText } from '../features/OrderConfirm/constants';
+import { orderBtnLabel } from '../features/entry/OrderEntry/constants';
+import {
+    confirmOrderBtnLabel,
+    termsText
+} from '../features/SummaryForm/constants';
 
 let orderButton;
 let vanillaInput;
@@ -10,7 +16,7 @@ beforeEach(async () => {
     render(<App />);
 
     orderButton = await screen.findByRole('button', {
-        name: 'Order sundae!'
+        name: orderBtnLabel
     });
 
     vanillaInput = await screen.findByRole('spinbutton', {
@@ -47,16 +53,16 @@ test('Order phases', async () => {
     expect(toppingsHeading).toBeInTheDocument();
 
     // confirm
-    const agreeCheckbox = screen.getByTestId('terms');
+    const agreeCheckbox = screen.getByText(termsText);
     userEvent.click(agreeCheckbox);
 
     const confirmButton = screen.getByRole('button', {
-        name: 'Confirm Order'
+        name: confirmOrderBtnLabel
     });
     userEvent.click(confirmButton);
 
     // display loading
-    const loading = screen.getByText('Loading...');
+    const loading = screen.getByText(loadingText);
     expect(loading).toBeInTheDocument();
 
     // display thank you

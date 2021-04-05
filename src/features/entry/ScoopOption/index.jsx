@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 
 import client from '../../../api/client';
+import { scoopAlertText } from './constants';
 import sharedStyles from '../styles';
 
 const styles = {
@@ -45,7 +46,7 @@ export default function ScoopOptions({ item, updateItemCount }) {
                     {isInvalid && (
                         <Form.Control.Feedback type="invalid">
                             <span style={styles.alertMessage}>
-                                Please provide a number above zero.
+                                {scoopAlertText}
                             </span>
                         </Form.Control.Feedback>
                     )}

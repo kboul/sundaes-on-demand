@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
-import { useOrderDetails } from '../contexts/OrderDetails';
-import client from '../api/client';
+import { useOrderDetails } from '../../contexts/OrderDetails';
+import client from '../../api/client';
+import { loadingText } from './constants';
 
 const styles = { container: { textAlign: 'center' } };
 
@@ -40,7 +41,7 @@ export default function OrderConfirm({ setOrderPhase }) {
                 <Button onClick={handleClick}>Create new order</Button>
             </div>
         );
-    return <div>Loading...</div>;
+    return <div>{loadingText}</div>;
 }
 
 OrderConfirm.propTypes = {
