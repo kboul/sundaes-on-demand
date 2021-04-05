@@ -19,8 +19,6 @@ beforeEach(async () => {
 });
 
 test('Order phases', async () => {
-    expect(orderButton).toBeDisabled();
-
     // add ice cream scoops and toppings
     userEvent.clear(vanillaInput);
     userEvent.type(vanillaInput, '1');
@@ -35,8 +33,6 @@ test('Order phases', async () => {
         name: 'Cherries'
     });
     userEvent.click(cherriesCheckbox);
-
-    expect(orderButton).toBeEnabled();
 
     // order
     userEvent.click(orderButton);

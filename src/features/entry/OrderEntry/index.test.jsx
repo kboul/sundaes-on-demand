@@ -26,14 +26,27 @@ test('handles error for scoops and toppings routes', async () => {
 });
 
 describe('grand total', () => {
-    test('updates properly if scoop is added first', async () => {
-        render(<OrderEntry />);
-        const grandTotal = screen.getByText('Grand total', { exact: false });
-        expect(grandTotal).toHaveTextContent('0.00');
+    let grandTotal;
+    let vanillaInput;
+    let cherriesInput;
 
-        const vanillaInput = await screen.findByRole('spinbutton', {
+    beforeEach(async () => {
+        render(<OrderEntry />);
+
+        grandTotal = screen.getByText('Grand total', { exact: false });
+
+        vanillaInput = await screen.findByRole('spinbutton', {
             name: 'Vanilla'
         });
+
+        cherriesInput = await screen.findByRole('checkbox', {
+            name: 'Cherries'
+        });
+    });
+
+    test('updates properly if scoop is added first', async () => {
+        expect(grandTotal).toHaveTextContent('0.00');
+
         userEvent.clear(vanillaInput);
         userEvent.type(vanillaInput, '2');
 
@@ -41,29 +54,15 @@ describe('grand total', () => {
     });
 
     test('updates properly if topping is added first', async () => {
-        render(<OrderEntry />);
-
-        const cherriesInput = await screen.findByRole('checkbox', {
-            name: 'Cherries'
-        });
         userEvent.click(cherriesInput);
 
-        const grandTotal = screen.getByText('Grand total', { exact: false });
         expect(grandTotal).toHaveTextContent('1.50');
     });
 
     test('updates properly if item is removed', async () => {
-        render(<OrderEntry />);
-
-        const cherriesInput = await screen.findByRole('checkbox', {
-            name: 'Cherries'
-        });
         // add cherry ( + 1.50)
         userEvent.click(cherriesInput);
 
-        const vanillaInput = await screen.findByRole('spinbutton', {
-            name: 'Vanilla'
-        });
         userEvent.clear(vanillaInput);
         // add 3 vanillas (+6)
         userEvent.type(vanillaInput, '3');
@@ -71,7 +70,6 @@ describe('grand total', () => {
         // remove cherry (-1.50)
         userEvent.click(cherriesInput);
 
-        const grandTotal = screen.getByText('Grand total', { exact: false });
         // expect to have total 6
         expect(grandTotal).toHaveTextContent('6.00');
 
@@ -81,4 +79,25 @@ describe('grand total', () => {
         // expect to have total 4
         expect(grandTotal).toHaveTextContent('4.00');
     });
+});
+
+test('enable order button if scoops or toppings have been selected', async () => {
+    render(<OrderEntry setOrderPhase={jest.fn()} />);
+
+    const orderButton = await screen.findByRole('button', {
+        name: 'Order sundae!'
+    });
+    expect(orderButton).toBeDisabled();
+
+    const vanillaInput = await screen.findByRole('spinbutton', {
+        name: 'Vanilla'
+    });
+    userEvent.clear(vanillaInput);
+    userEvent.type(vanillaInput, '1');
+
+    expect(orderButton).toBeEnabled();
+
+    userEvent.clear(vanillaInput);
+    userEvent.type(vanillaInput, '0');
+    expect(orderButton).toBeDisabled();
 });
