@@ -9,9 +9,11 @@ export default function OrderSummary({ setOrderPhase }) {
     return (
         <div>
             <h1>Order Summary</h1>
-            <h2>Scoops: {orderDetails.totals.scoops}</h2>
-            {orderDetails.totals.toppings !== formatCurrency(0) && (
-                <h2>Toppings: {orderDetails.totals.toppings}</h2>
+            <h2>Scoops: {formatCurrency(orderDetails.totals.scoops)}</h2>
+            {orderDetails.totals.toppings > 0 && (
+                <h2>
+                    Toppings: {formatCurrency(orderDetails.totals.toppings)}
+                </h2>
             )}
             <SummaryForm setOrderPhase={setOrderPhase} />
         </div>
