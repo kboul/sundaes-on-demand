@@ -21,6 +21,6 @@ export const handlers = [
         );
     }),
     rest.post(`${client.defaults.baseURL}/order`, (req, res, ctx) => {
-        return res(ctx.json(1233332536));
+        return res(ctx.json({ orderNumber: 1233332536 }));
     })
 ];
