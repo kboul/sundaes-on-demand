@@ -3,18 +3,25 @@ import userEvent from '@testing-library/user-event';
 
 import App from '.';
 
-test('Order phases', async () => {
+let orderButton;
+let vanillaInput;
+
+beforeEach(async () => {
     render(<App />);
 
-    const orderButton = await screen.findByRole('button', {
+    orderButton = await screen.findByRole('button', {
         name: 'Order sundae!'
     });
+
+    vanillaInput = await screen.findByRole('spinbutton', {
+        name: 'Vanilla'
+    });
+});
+
+test('Order phases', async () => {
     expect(orderButton).toBeDisabled();
 
     // add ice cream scoops and toppings
-    const vanillaInput = await screen.findByRole('spinbutton', {
-        name: 'Vanilla'
-    });
     userEvent.clear(vanillaInput);
     userEvent.type(vanillaInput, '1');
 
@@ -80,4 +87,14 @@ test('Order phases', async () => {
     // happening after test is over
     await screen.findByRole('spinbutton', { name: 'Vanilla' });
     await screen.findByRole('checkbox', { name: 'Cherries' });
+});
+
+test('toppings section not displayed  if no toppings have been selected', async () => {
+    userEvent.clear(vanillaInput);
+    userEvent.type(vanillaInput, '1');
+
+    userEvent.click(orderButton);
+
+    const toppingsHeader = screen.queryByText('Toppings:', { exact: false });
+    expect(toppingsHeader).not.toBeInTheDocument();
 });
