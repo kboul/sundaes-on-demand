@@ -39,8 +39,9 @@ export function OrderDetailsProvider(props) {
     });
 
     useEffect(() => {
-        const scoopsSubtotal = calculateSubtotal('scoops', optionCounts);
+        let scoopsSubtotal = calculateSubtotal('scoops', optionCounts);
         const toppingsSubtotal = calculateSubtotal('toppings', optionCounts);
+        if (scoopsSubtotal < 0) scoopsSubtotal = 0;
         const grandTotal = scoopsSubtotal + toppingsSubtotal;
 
         setTotals({

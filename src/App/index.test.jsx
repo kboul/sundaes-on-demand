@@ -43,14 +43,14 @@ test('Order phases', async () => {
     // order
     userEvent.click(orderButton);
 
-    const scoopsHeading = screen.getByRole('heading', {
+    const scoopsHeader = screen.getByRole('heading', {
         name: 'Scoops: $6.00'
     });
-    expect(scoopsHeading).toBeInTheDocument();
-    const toppingsHeading = screen.getByRole('heading', {
+    expect(scoopsHeader).toBeInTheDocument();
+    const toppingsHeader = screen.getByRole('heading', {
         name: 'Toppings: $1.50'
     });
-    expect(toppingsHeading).toBeInTheDocument();
+    expect(toppingsHeader).toBeInTheDocument();
 
     // confirm
     const agreeCheckbox = screen.getByText(termsText);
@@ -66,10 +66,10 @@ test('Order phases', async () => {
     expect(loading).toBeInTheDocument();
 
     // display thank you
-    const thankYouHeading = await screen.findByRole('heading', {
+    const thankYouHeader = await screen.findByRole('heading', {
         name: 'Thank you!'
     });
-    expect(thankYouHeading).toBeInTheDocument();
+    expect(thankYouHeader).toBeInTheDocument();
 
     const notLoading = screen.queryByText('Loading...');
     expect(notLoading).not.toBeInTheDocument();

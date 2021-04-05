@@ -80,6 +80,17 @@ describe('Grand total', () => {
         // expect to have total 4
         expect(grandTotal).toHaveTextContent('4.00');
     });
+
+    test('should keep grand total to 0 if scoop total is negative', () => {
+        userEvent.clear(vanillaInput);
+        userEvent.type(vanillaInput, '-1');
+
+        expect(grandTotal).toHaveTextContent('$0.00');
+
+        userEvent.clear(vanillaInput);
+        userEvent.type(vanillaInput, '2');
+        expect(grandTotal).toHaveTextContent('$4.00');
+    });
 });
 
 test('enable order button if scoops or toppings have been selected', async () => {
