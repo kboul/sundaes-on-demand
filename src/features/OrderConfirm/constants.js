@@ -1,3 +1,5 @@
 const loadingText = 'Loading...';
 
-export { loadingText };
+const newOrderBtnLabel = 'Create new order';
+
+export { loadingText, newOrderBtnLabel };

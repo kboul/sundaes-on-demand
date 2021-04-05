@@ -2,22 +2,24 @@ import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
+import AlertBanner from '../../components/AlertBanner';
 import { useOrderDetails } from '../../contexts/OrderDetails';
 import client from '../../api/client';
-import { loadingText } from './constants';
+import { loadingText, newOrderBtnLabel } from './constants';
 
 const styles = { container: { textAlign: 'center' } };
 
 export default function OrderConfirm({ setOrderPhase }) {
     const [, , resetOrder] = useOrderDetails();
     const [orderNumber, setOrderNumber] = useState(null);
+    const [error, setError] = useState(false);
 
     const order = async () => {
         try {
             const response = await client.post('/order');
             setOrderNumber(response.data.orderNumber);
-        } catch (error) {
-            console.log(error);
+        } catch (err) {
+            setError(true);
         }
     };
 
@@ -33,12 +35,13 @@ export default function OrderConfirm({ setOrderPhase }) {
         setOrderPhase('inProgress');
     }
 
+    if (error) return <AlertBanner />;
     if (orderNumber)
         return (
             <div style={styles.container}>
                 <h1>Thank you!</h1>
                 <p>Your order number is {orderNumber}</p>
-                <Button onClick={handleClick}>Create new order</Button>
+                <Button onClick={handleClick}>{newOrderBtnLabel}</Button>
             </div>
         );
     return <div>{loadingText}</div>;

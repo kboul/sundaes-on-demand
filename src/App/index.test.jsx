@@ -2,7 +2,10 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import App from '.';
-import { loadingText } from '../features/OrderConfirm/constants';
+import {
+    loadingText,
+    newOrderBtnLabel
+} from '../features/OrderConfirm/constants';
 import { orderBtnLabel } from '../features/entry/OrderEntry/constants';
 import {
     confirmOrderBtnLabel,
@@ -75,7 +78,7 @@ test('Order phases', async () => {
     expect(notLoading).not.toBeInTheDocument();
 
     const createNewOrderButton = await screen.findByRole('button', {
-        name: 'Create new order'
+        name: newOrderBtnLabel
     });
     userEvent.click(createNewOrderButton);
 
