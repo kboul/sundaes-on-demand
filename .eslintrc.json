@@ -41,6 +41,7 @@
         "react/require-default-props": "off",
         "react/jsx-props-no-spreading": "off",
         "radix": "off",
+        "no-nested-ternary": "off",
         // allow imports of devDependencies in test files only
         "import/no-extraneous-dependencies": [
             "error",

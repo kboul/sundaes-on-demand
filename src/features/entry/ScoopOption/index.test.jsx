@@ -4,7 +4,7 @@ import userEvent from '@testing-library/user-event';
 import ScoopOption from '.';
 import { scoopAlertText } from './constants';
 
-test('alet should be displayed when scoop has negative input', () => {
+test('alert should be displayed when scoop has negative input', () => {
     render(
         <ScoopOption
             item={{ name: '', imagePath: '' }}

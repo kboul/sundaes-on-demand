@@ -7,11 +7,10 @@ const OrderDetails = createContext();
 export function useOrderDetails() {
     const context = useContext(OrderDetails);
 
-    if (!context) {
+    if (!context)
         throw new Error(
             'useOrderDetails must be used within an OrderDetailsProvider'
         );
-    }
 
     return context;
 }

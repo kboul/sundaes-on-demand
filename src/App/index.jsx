@@ -9,20 +9,12 @@ import OrderSummary from '../features/OrderSummary';
 export default function App() {
     const [orderPhase, setOrderPhase] = useState('inProgress');
 
-    let Component = OrderEntry;
-    switch (orderPhase) {
-        case 'inProgress':
-            Component = OrderEntry;
-            break;
-        case 'review':
-            Component = OrderSummary;
-            break;
-        case 'completed':
-            Component = OrderConfirm;
-            break;
-        default:
-            break;
-    }
+    const Component =
+        orderPhase === 'inProgress'
+            ? OrderEntry
+            : orderPhase === 'review'
+            ? OrderSummary
+            : OrderConfirm;
 
     return (
         <Container>
